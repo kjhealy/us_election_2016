@@ -1,7 +1,6 @@
 ### US State Election Data http://uselectionatlas.org/RESULTS/data.php?year=2016&datatype=national&def=1&f=0&off=0&elect=0
 
 
-library(htmltab)
 library(rvest)
 library(tidyverse)
 
@@ -21,11 +20,8 @@ clean_col <- function(x) {
 
 
 url <- "http://uselectionatlas.org/RESULTS/data.php?year=2016&datatype=national&def=1&f=0&off=0&elect=0"
-
-election <- htmltab(doc = url, which = "//*[(@id = 'data')]")
-
 page <- read_html(url)
-save(page, file = "data/page")
+save(page, file = "data/page.rda")
 
 
 election_dirty <- page %>% html_node("#datatable") %>% html_table()
