@@ -83,11 +83,16 @@ election_dirty$st[9] <- "DC"
 election_dirty$fips <- fips$fips[ind]
 election_dirty$fips[9] <- 11
 
+election_dirty$winner <- "Trump"
+election_dirty$winner[election_dirty$clinton_vote > election_dirty$trump_vote] <- "Clinton"
+
+election_dirty$party <- "Republican"
+election_dirty$party[election_dirty$clinton_vote > election_dirty$trump_vote] <- "Democrat"
 
 
 
 election <- election_dirty %>%
-    select(state, st, fips, total_vote, vote_margin,
+    select(state, st, fips, total_vote, vote_margin, winner, party,
            pct_margin, r_points, d_points, pct_clinton, pct_trump, pct_johnson, pct_other, clinton_vote,
            trump_vote, johnson_vote, other_vote, ev_dem, ev_rep, ev_oth)
 
